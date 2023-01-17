@@ -42,7 +42,28 @@ function getMostPopularBooks(books) {
 }
 
 function getMostPopularAuthors(books, authors) {
-  
+  let authorsArray = [];
+
+  for (let book of books) {
+    let foundId = authorsArray.some(idInArray => (idInArray.authorId === book.authorId));
+    if (foundId) {
+      authorsArray[authorsArray.findIndex(id => id.authorId === book.authorId)].count += book.borrows.length;
+    } else {
+      authorsArray.push({ authorId: book.authorId, count: book.borrows.length })
+    }
+  }
+
+  authorsArray.sort((authorA, authorB) => {
+    return authorA.count > authorB.count ? -1 : 1;
+  })
+
+  let fivePopAuthors = addNumberOfElementsToArray(authorsArray, 5);
+  let popAuthorsWithName = [];
+  for(let ids of fivePopAuthors) {
+    let foundAuthor = authors.find(author => (author.id === ids.authorId))
+    popAuthorsWithName.push({name: `${foundAuthor.name.first} ${foundAuthor.name.last}`, count: ids.count})
+  }
+  return(popAuthorsWithName);
 }
 
 function addNumberOfElementsToArray(userArray, numberOfelements) { //userArray should be arrray off authors, books, or accounts
