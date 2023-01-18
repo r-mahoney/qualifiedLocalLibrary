@@ -1,12 +1,12 @@
-function findAccountById(accounts, id) {
+function findAccountById(accounts = [], id = "") {
   return accounts.find((account) => (account.id === id));
 }
 
-function sortAccountsByLastName(accounts) {
+function sortAccountsByLastName(accounts = []) {
   return accounts.sort((account1, account2) => (account1.name.last.toLowerCase() > account2.name.last.toLowerCase() ? 1 : -1));
 }
 
-function getTotalNumberOfBorrows(account, books) {
+function getTotalNumberOfBorrows(account = {}, books = []) {
   return books.flatMap(({ borrows }) => borrows.map(({ id }) => (id)))
     .reduce((total, id) => {
       return total + (id === account.id);

@@ -6,14 +6,14 @@ function getTotalAccountsCount(accounts = []) {
   return accounts.length;
 }
 
-function getBooksBorrowedCount(books) {
+function getBooksBorrowedCount(books = []) {
   const borrowedBooks = books.filter(book => {
     return book.borrows.some(status => (status.returned === false));
   })
   return borrowedBooks.length;
 }
 
-function getMostCommonGenres(books) {
+function getMostCommonGenres(books = []) {
   let genres = books.reduce((total, book) => {
     let currentGenre = book.genre;
     total[book.genre] = books.filter(book => (book.genre === currentGenre));
@@ -30,7 +30,7 @@ function getMostCommonGenres(books) {
   return addNumberOfElementsToArray(arrayOfGenres, 5)
 }
 
-function getMostPopularBooks(books) {
+function getMostPopularBooks(books = []) {
   //sorts books by number of times theyve been borrowed
   books.sort((bookA, bookB) => (bookA.borrows.length > bookB.borrows.length ? -1 : 1));
   //map array to generate array of [{ name: "incididunt nostrud minim", count: 30 }]
@@ -41,7 +41,7 @@ function getMostPopularBooks(books) {
   return addNumberOfElementsToArray(booksByTitleAndCount, 5);
 }
 
-function getMostPopularAuthors(books, authors) {
+function getMostPopularAuthors(books = [], authors = []) {
   let authorsArray = [];
 
   for (let book of books) {
@@ -66,7 +66,7 @@ function getMostPopularAuthors(books, authors) {
   return(popAuthorsWithName);
 }
 
-function addNumberOfElementsToArray(userArray, numberOfelements) { //userArray should be arrray off authors, books, or accounts
+function addNumberOfElementsToArray(userArray = [], numberOfelements = 0) { //userArray should be arrray off authors, books, or accounts
   let generatedArr = [];
   for (let i = 0; i < userArray.length; i++) {
     if (generatedArr.length < numberOfelements) {
