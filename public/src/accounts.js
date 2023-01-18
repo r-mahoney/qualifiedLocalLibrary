@@ -3,14 +3,13 @@ function findAccountById(accounts = [], id = "") {
 }
 
 function sortAccountsByLastName(accounts = []) {
-  return accounts.sort((account1, account2) => (account1.name.last.toLowerCase() > account2.name.last.toLowerCase() ? 1 : -1));
+  return accounts.sort((account1, account2) => 
+    (account1.name.last.toLowerCase() > account2.name.last.toLowerCase() ? 1 : -1));
 }
 
 function getTotalNumberOfBorrows(account = {}, books = []) {
   return books.flatMap(({ borrows }) => borrows.map(({ id }) => (id)))
-    .reduce((total, id) => {
-      return total + (id === account.id);
-    }, 0);
+    .reduce((total, id) => total + (id === account.id), 0);
 }
 
 function getBooksPossessedByAccount({id} = {}, books = [], authors = []) {
