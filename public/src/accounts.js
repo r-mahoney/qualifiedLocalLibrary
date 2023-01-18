@@ -13,10 +13,10 @@ function getTotalNumberOfBorrows(account = {}, books = []) {
     }, 0);
 }
 
-function getBooksPossessedByAccount(account, books, authors) {
+function getBooksPossessedByAccount({id} = {}, books = [], authors = []) {
   // get array of all borrowed books
   let borrowed = (books.filter(book => book.borrows.some((currentBook) => (currentBook.returned === false))))
-    .filter(book => book.borrows[0].id === account.id)
+    .filter(book => book.borrows[0].id === id)
 
   let booksWithAuthor = []
 // for each borrowed book by this account, find the author at the current book id and then push the book object with the found author value
