@@ -45,9 +45,9 @@ function getMostPopularAuthors(books = [], authors = []) {
   let authorsArray = [];
 
   for (let book of books) {
-    let foundId = authorsArray.some(idInArray => (idInArray.authorId === book.authorId));
+    let foundId = authorsArray.find(idInArray => (idInArray.authorId === book.authorId));
     if (foundId) {
-      authorsArray[authorsArray.findIndex(id => id.authorId === book.authorId)].count += book.borrows.length;
+      foundId.count += book.borrows.length;
     } else {
       authorsArray.push({ authorId: book.authorId, count: book.borrows.length })
     }
